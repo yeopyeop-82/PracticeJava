@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 // 배열생성

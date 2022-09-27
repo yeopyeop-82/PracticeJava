@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 
 // do-while
 public class Practice3_3 {

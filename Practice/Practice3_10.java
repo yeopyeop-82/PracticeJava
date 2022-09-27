@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 //2차원 배열실습

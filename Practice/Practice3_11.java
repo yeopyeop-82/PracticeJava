@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 
 //비정방형 배열 생성 실습
 // C에서는 비정방형 배열선언이 불가능하다

@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 //Switch 문 활용 

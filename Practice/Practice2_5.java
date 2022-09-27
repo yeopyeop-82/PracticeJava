@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 // /와%산술연산 실습 

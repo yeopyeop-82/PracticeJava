@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 //예제 2-4 Scanner를 활용한 키 입력연습 

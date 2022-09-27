@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 import java.util.Scanner;
 
 //두 수의 차를 조건 연산을 이용 항상 양수가 나오게 !!

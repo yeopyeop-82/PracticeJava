@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 
 // for-each문 활용
 // 파이썬 처럼 반복문 활용하기 

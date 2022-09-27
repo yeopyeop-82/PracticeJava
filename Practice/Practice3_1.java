@@ -1,4 +1,4 @@
-package Practice;
+package practice;
 
 //반복문 -> c랑 같
 public class Practice3_1 {
