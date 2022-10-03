@@ -1,16 +1,8 @@
 package practice;
 
 public class practice4_6 {
-	class Circle{
-		int radius;
-		public Circle(int radius) {
-			this.radius = radius;
-		}
-		public double getArea() {
-			return 3.14*radius*radius;
-		}
-	} 
-	
-	public 
+	public static void main(String args[]) {
+		System.out.println("hello, world!");
+	}
 	
 }
