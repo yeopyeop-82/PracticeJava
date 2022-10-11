@@ -1,35 +1,39 @@
 package rollDie;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Random;
 
-class Dice {
-	private int dice[] = new int[2];
-	Random r = new Random();
+//상명대힉교 컴퓨터과학과 201910934 김승엽 
+
+class Die {
+	private int dieNum;
 	
-	public Dice() {
-		dice[0] = r.nextInt(5) + 1;
-		dice[1] = r.nextInt(5) + 1;
-	}
-		
-	public int getDice(int i) {
-		return dice[i];
+	public Die() {}
+	
+	public int roll() {
+		Random random = new Random();
+		dieNum = (random.nextInt(6)) + 1;
+		return dieNum;
 	}
 	
-	public int getDiceSum() {
-		return dice[0] + dice[1];
-	}
 }
 
-class Player {
+class Player{
 	private String name;
 	private int wins;
 	private int defeats;
-	private int result;
+	private int dice1;
+	private int dice2;
 	
-	public Player(String name) {
-		this.name = name;
+	public Player () {
 		wins = 0;
 		defeats = 0;
+		dice1 = 0;
+		dice2 = 0;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setWins() {
@@ -40,100 +44,143 @@ class Player {
 		defeats++;
 	}
 	
-	public void setResult(int result) {
-		this.result = result;
+	public void setDice1(int dice1) {
+		this.dice1 = dice1;
 	}
 	
-	public String getName() {
+	public void setDice2(int dice2) {
+		this.dice2 = dice2;
+	}
+	
+	public String returnName() {
 		return name;
 	}
 	
-	public int getWins() {
+	public int returnWins() {
 		return wins;
 	}
 	
-	public int getDefeats() {
+	public int returnDefeats() {
 		return defeats;
 	}
 	
-	public int getResult() {
-		return result;
+	public int returnDice1() {
+		return dice1;
 	}
+	
+	public int returnDice2() {
+		return dice2;
+	}
+	
+	public int returnSum() {
+		return dice1 + dice2;
+	}
+	
+	
 }
 
-class GameManager {
-	private int participants;
-	private String name[] = new String[6];
+class gameManager {
+	private int biggest;
+	private int winPlayer[] = new int[6];
+	private int reset[] = new int[6];
 	
-	public GameManager() {};
+	public gameManager() {
+		biggest = 0;
+	}
 	
-	public void setParticipants() {
-		System.out.println("게임 참가자의 수를 입력하시오. ");
+	public void setBiggest(int sum, int i) {
+		if (sum > biggest) {
+			biggest = sum;
+			winPlayer = Arrays.copyOf(reset, 6);
+			winPlayer[i] = 1;
+		}
+		else if (sum == biggest) {
+			winPlayer[i] = 1;
+		}
+	}
+	
+	public int[] wins() {
+		return winPlayer;
+	}
+	
+}
+
+public class roll_die {
+	public static void main(String[] args) {
+		int participants = 0;
+		int gameCount = 0;
+		int ifRoll = 0;
+		String continueGame = "y";
+		
 		Scanner s = new Scanner(System.in);
+		
+		Player players[] = new Player[6];
+		Die die = new Die();
+		
+		System.out.println("게임 참가자의 수를 입력하시오.");
 		participants = s.nextInt();
 		
 		System.out.println("게임 참가자의 이름을 차례로 입력하시오. ");
+		
 		for (int i = 0; i < participants; i++) {
-			System.out.println(i+1 + " 번째 참가자 이름 입력 : ");
-			name[i] = s.next();
+			System.out.println(i+1 + "번째 참가자 이름 입력 : ");
+			players[i] = new Player();
+			players[i].setName(s.next());
 		}
-		
-		s.close();
-	}
-	
-	public int getParticipants() {
-		return participants;
-	}
-	
-	public String getName(int i) {
-		return name[i];
-	}
-}
-
-public class Roll_die {
-	public static void main(String[] args) {
-		String gameContinue = "y";
-		int gameCount = 1;
-		int rollDice = 0;
-		int biggest = 0;
-		int winIndex = 0;
-		Scanner scanner = new Scanner(System.in);
-		
-		GameManager g = new GameManager();
-		g.setParticipants();
-		
-		Player p[] = new Player[6];
-		for(int i = 0; i < g.getParticipants() ; i++) {
-			p[i] = new Player(g.getName(i));
-		} //객체배열 초기화 
 		
 		System.out.println("*** 지금부터 게임을 시작합니다. ***");
 		
-		while(gameContinue == "y") {
-			System.out.println("Game #" + gameCount);
-			for (int j = 0; j < g.getParticipants(); j++) {
-				Dice d = new Dice();
-				System.out.println(g.getName(j) + "차례입니다. 주사위를 던지려면 1을 입력하세요 ");
-				rollDice = scanner.nextInt();
-				if(rollDice == 1) {
-					System.out.println(g.getName(j) + ": 첫번째 주사위 " + d.getDice(0) + "두 번째 주사위 " + d.getDice(1) + " 두 주사위의 합 : " + d.getDiceSum());
-					p[j].setResult(d.getDiceSum());
+		while (continueGame.equals("y")) {
+			System.out.println("Game #" + ++gameCount);
+			
+			gameManager gm = new gameManager();
+			
+			for (int i = 0; i < participants; i++) {
+				System.out.println(players[i].returnName() + "차례입니다. 주사위를 던지려면 1을 입력하세요."); 
+				ifRoll = s.nextInt();
+				if (ifRoll == 1) {
+					players[i].setDice1(die.roll());
+					players[i].setDice2(die.roll());
+				}
+				else {
+					return;
+				}
+				System.out.printf("%s : 첫번째 주사위 %d  두번째 주사위 %d  두 주사위의 합 : %d \n", 
+						players[i].returnName(), players[i].returnDice1(), players[i].returnDice2(), players[i].returnSum());
+				
+				gm.setBiggest(players[i].returnSum(), i);
+				
+			}
+			
+			int winPlayers[] = new int[6];
+			winPlayers = gm.wins();
+			
+			System.out.print("이번 게임의 승자는 ");
+			
+			for (int i = 0; i < participants; i++) {
+				if (winPlayers[i] == 1) {
+					players[i].setWins();
+					System.out.print(players[i].returnName() + " ");
+				}
+				else {
+					players[i].setDefeats();
 				}
 			}
 			
-			for (int i = 0; i < g.getParticipants(); i++) {
-				if (biggest <= p[i].getResult()) {
-					biggest = p[i].getResult();
-					winIndex = i;
-				}
-			}
+			System.out.println("입니다.");
 			
-			System.out.println("이번 게임의 승자는 " + p[winIndex].getName() + " 입니다.");
-			p[winIndex].setWins();
-			
+			System.out.println("게임을 계속 하시겠습니까? (y/n)");
+			continueGame = s.next();
 			
 		}
 		
+		System.out.println("게임이 종료되었습니다.");
+		System.out.printf("전체 %d 게임 중 \n",gameCount);
+		for (int i = 0; i < participants; i++) {
+			System.out.printf("%s : %d 승 %d 패 \n", 
+					players[i].returnName(), players[i].returnWins(), players[i].returnDefeats());
+		}
+		s.close();
+		
 	}
-
 }
