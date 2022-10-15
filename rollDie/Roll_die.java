@@ -154,7 +154,6 @@ public class roll_die {
 			
 			int winPlayers[] = new int[6];
 			winPlayers = gm.wins();
-			
 			System.out.print("이번 게임의 승자는 ");
 			
 			for (int i = 0; i < participants; i++) {
