@@ -1,39 +1,33 @@
 package review1;
 
-class Circle {
-	private int r;
-	private String name;
+class Book {
+	private String title;
+	private String author;
 	
-	public Circle(int r, String name) {
-		this.r = r;
-		this.name = name;
+	public Book (String t) {
+		title = t;
+		author = "Jane doe";
 	}
 	
-	public Circle() {}
-	
-	public double circleArea() {
-		return r * r * 3.14;
+	public Book (String t, String a) {
+		title = t;
+		author = a;
 	}
 	
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 	
-	public int getRadius() {
-		return r;
+	public String getAuthor() {
+		return author;
 	}
-	
-	
 }
 
-public class practice4_1 {
-	public static void main() {
-		Circle c1 = new Circle(6, "자바피자");
-		Circle c2 = new Circle(5, "자바도넛");
-		
-		System.out.println(c1.getName() + "의 면적은 " + c1.circleArea());
-		System.out.println(c2.getName() + "의 면적은 " + c2.circleArea());
-		
+public class Practice4_1 {
+	public static void main(String[] args) {
+		Book littlePrince = new Book("어린왕자", "생텍쥐페리");
+		Book loveStory = new Book("춘향전");
+		System.out.println(littlePrince.getTitle() + " " + littlePrince.getAuthor());
+		System.out.println(loveStory.getTitle() + " " + loveStory.getAuthor());
 	}
-
 }
